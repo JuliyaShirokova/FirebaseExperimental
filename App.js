@@ -6,10 +6,10 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-
-import firebase from '@react-native-firebase/app';
+import React, { Component } from "react";
+import { View, Button, StyleSheet, TextInput, Text } from "react-native";
+import auth from "@react-native-firebase/auth";
+//TODO save credentials
 
 // TODO(you): import any additional firebase services that you require for your app, e.g for auth:
 //    1) install the npm package: `yarn add @react-native-firebase/auth@alpha` - you do not need to
@@ -18,30 +18,61 @@ import firebase from '@react-native-firebase/app';
 //    3) import the package here in your JavaScript code: `import '@react-native-firebase/auth';`
 //    4) The Firebase Auth service is now available to use here: `firebase.auth().currentUser`
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\nCmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\nShake or press menu button for dev menu',
-});
+export default class App extends Component {
+  constructor(props) {
+    super(props);
 
-const firebaseCredentials = Platform.select({
-  ios: 'https://invertase.link/firebase-ios',
-  android: 'https://invertase.link/firebase-android',
-});
+    this.state = {
+      login: "",
+      password: "",
+      errorText: ""
+    };
+  }
 
-type Props = {};
+  componentDidMount() {}
+  componentWillUnmount() {}
 
-export default class App extends Component<Props> {
+  formError = error => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if (errorCode == "auth/weak-password") {
+      this.setState({ errorText: "The password is too weak." });
+    } else {
+      this.setState({ errorText: errorMessage });
+    }
+  };
+
+  onHandleLogin = async () => {
+    const _login = this.state.login;
+    const _password = this.state.password;
+    const userCredential = await auth()
+      .createUserWithEmailAndPassword(_login, _password)
+      .then(res => console.log("login success!", res))
+      .catch(err => this.formError(err));
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native + Firebase!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        {!firebase.apps.length && (
-          <Text style={styles.instructions}>
-            {`\nYou currently have no Firebase apps registered, this most likely means you've not downloaded your project credentials. Visit the link below to learn more. \n\n ${firebaseCredentials}`}
-          </Text>
-        )}
+        <TextInput
+          style={styles.textInput}
+          onChangeText={login => this.setState({ login })}
+          value={this.state.login}
+          placeholder="email"
+        />
+        <TextInput
+          style={styles.textInput}
+          onChangeText={password => this.setState({ password })}
+          value={this.state.password}
+          placeholder="password"
+          secureTextEntry
+        />
+        <Button
+          title="login"
+          onPress={this.onHandleLogin}
+          style={styles.buttonLogin}
+          />
+        <Text style={{ color: "red" }}>{this.state.errorText}</Text>
       </View>
     );
   }
@@ -50,18 +81,19 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF"
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  textInput: {
+    width: 250,
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginVertical: 5
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  buttonLogin: {
+    width: 250,
+    height: 40,
+  }
 });
