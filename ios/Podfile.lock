@@ -1,6 +1,8 @@
 PODS:
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
+  - Firebase/Analytics (6.8.1):
+    - Firebase/Core
   - Firebase/Core (6.8.1):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.1.1)
@@ -148,6 +150,7 @@ PODS:
 
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - Firebase/Analytics
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - React (from `../node_modules/react-native/`)
@@ -267,6 +270,6 @@ SPEC CHECKSUMS:
   RNFBApp: 5dd12fdb688ddd25aa756d8cd2780abaadf15709
   yoga: 312528f5bbbba37b4dcea5ef00e8b4033fdd9411
 
-PODFILE CHECKSUM: 867356d76be098974787ac56477ffd0c15a9d34d
+PODFILE CHECKSUM: 96f3b0baf2a0d10e66df339f55e5bf82d3d9bfdf
 
 COCOAPODS: 1.7.5
