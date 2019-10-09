@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { Component } from "react";
 import { View, Button, StyleSheet, TextInput, Text } from "react-native";
 import auth from "@react-native-firebase/auth";
@@ -33,25 +34,26 @@ export default class LoginScreen extends Component {
       successText:
         'User with email "' +
         res.user.email +
-        '" was successfuly login'
+        '" was successfuly register'
     });
   };
 
-  onHandleLogin = async () => {
+  onHandleRegister = async () => {
     const _login = this.state.login;
     const _password = this.state.password;
     const userCredential = await auth()
-      .signInWithEmailAndPassword(_login, _password)
+      .createUserWithEmailAndPassword(_login, _password)
       .then(res => this.formSuccess(res))
       .catch(err => this.formError(err));
     this.setState({ userCredential });
+    this.props.navigation.navigate('Login')
   };
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.formStyle}>
-          <Text style={styles.formTitle}>Login form</Text>
+          <Text style={styles.formTitle}>Register form</Text>
           <TextInput
             style={styles.textInput}
             onChangeText={login => this.setState({ login })}
@@ -66,8 +68,8 @@ export default class LoginScreen extends Component {
             secureTextEntry
           />
           <Button
-            title="login"
-            onPress={this.onHandleLogin}
+            title="Register"
+            onPress={this.onHandleRegister}
             style={styles.buttonLogin}
           />
 
