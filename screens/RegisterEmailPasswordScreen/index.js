@@ -46,7 +46,6 @@ export default class LoginScreen extends Component {
       .then(res => this.formSuccess(res))
       .catch(err => this.formError(err));
     this.setState({ userCredential });
-    this.props.navigation.navigate('Login')
   };
 
   render() {

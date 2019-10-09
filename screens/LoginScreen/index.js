@@ -11,7 +11,8 @@ export default class LoginScreen extends Component {
       password: "",
       errorText: "",
       successText: "",
-      userCredential: ""
+      userCredential: "",
+      currentUser: undefined,
     };
   }
 
@@ -27,13 +28,14 @@ export default class LoginScreen extends Component {
       this.setState({ errorText: errorMessage });
     }
   };
+
   formSuccess = res => {
     console.log("res", res);
     this.setState({
       successText:
         'User with email "' +
         res.user.email +
-        '" was successfuly login'
+        '" was successfuly login',
     });
   };
 
@@ -45,6 +47,12 @@ export default class LoginScreen extends Component {
       .then(res => this.formSuccess(res))
       .catch(err => this.formError(err));
     this.setState({ userCredential });
+  };
+
+  onHandleGetCurrent = async () => {
+    const user = auth().currentUser;
+    this.setState({ currentUser: user });
+    console.log('user', user)
   };
 
   render() {
@@ -77,6 +85,12 @@ export default class LoginScreen extends Component {
           <Text style={[styles.textMessage, { color: "green" }]}>
             {this.state.successText}
           </Text>
+          <Button
+            title="get Current User"
+            onPress={this.onHandleGetCurrent}
+            style={styles.buttonLogin}
+          />
+          <Text style={styles.textMessage}>Current User - {this.state.currentUser && this.state.currentUser.email}</Text>
         </View>
       </View>
     );

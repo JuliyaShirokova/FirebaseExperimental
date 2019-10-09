@@ -6,9 +6,14 @@ export default class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Button
-          title="Email && Password login"
+          title="Email && Password Register"
           onPress={() => this.props.navigation.navigate("RegisterLoginPassword")}
-          style={styles.buttonLogin}
+          style={styles.buttonStyle}
+        />
+        <Button
+          title="Email && Password login"
+          onPress={() => this.props.navigation.navigate("LoginEmailPassword")}
+          style={styles.buttonStyle}
         />
       </View>
     );
@@ -17,13 +22,12 @@ export default class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    backgroundColor: "#F5FCFF",
   },
-  buttonLogin: {
+  buttonStyle: {
     width: 280,
     height: 40,
-    marginVertical: 10,
-  }
+  },
 });

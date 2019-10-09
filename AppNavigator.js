@@ -8,7 +8,7 @@ const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     RegisterLoginPassword: RegisterLoginPasswordScreen,
-    Login: LoginScreen
+    LoginEmailPassword: LoginScreen
   },
   {
     initialRouteName: 'Home',
