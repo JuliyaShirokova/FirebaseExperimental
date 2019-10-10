@@ -15,6 +15,11 @@ export default class HomeScreen extends Component {
           onPress={() => this.props.navigation.navigate("LoginEmailPassword")}
           style={styles.buttonStyle}
         />
+        <Button
+          title="Login Facebook"
+          onPress={() => this.props.navigation.navigate("LoginFacebook")}
+          style={styles.buttonStyle}
+        />
       </View>
     );
   }

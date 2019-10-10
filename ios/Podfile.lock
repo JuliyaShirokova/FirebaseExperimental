@@ -1,6 +1,20 @@
 PODS:
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
+  - FBSDKCoreKit (5.7.0):
+    - FBSDKCoreKit/Basics (= 5.7.0)
+    - FBSDKCoreKit/Core (= 5.7.0)
+  - FBSDKCoreKit/Basics (5.7.0)
+  - FBSDKCoreKit/Core (5.7.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.7.0):
+    - FBSDKLoginKit/Login (= 5.7.0)
+  - FBSDKLoginKit/Login (5.7.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FBSDKShareKit (5.7.0):
+    - FBSDKShareKit/Share (= 5.7.0)
+  - FBSDKShareKit/Share (5.7.0):
+    - FBSDKCoreKit (~> 5.0)
   - Firebase/Analytics (6.8.1):
     - Firebase/Core
   - Firebase/Auth (6.8.1):
@@ -131,6 +145,20 @@ PODS:
     - React-cxxreact (= 0.60.5)
     - React-jsi (= 0.60.5)
   - React-jsinspector (0.60.5)
+  - react-native-fbsdk (1.0.4):
+    - React
+    - react-native-fbsdk/Core (= 1.0.4)
+    - react-native-fbsdk/Login (= 1.0.4)
+    - react-native-fbsdk/Share (= 1.0.4)
+  - react-native-fbsdk/Core (1.0.4):
+    - FBSDKCoreKit (~> 5.5)
+    - React
+  - react-native-fbsdk/Login (1.0.4):
+    - FBSDKLoginKit (~> 5.5)
+    - React
+  - react-native-fbsdk/Share (1.0.4):
+    - FBSDKShareKit (~> 5.5)
+    - React
   - React-RCTActionSheet (0.60.5):
     - React-Core (= 0.60.5)
   - React-RCTAnimation (0.60.5):
@@ -182,6 +210,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -202,6 +231,9 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - boost-for-react-native
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -238,6 +270,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-fbsdk:
+    :path: "../node_modules/react-native-fbsdk"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -274,6 +308,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
+  FBSDKCoreKit: 0d2d450fe9447e204fa6e912e0df76dd36693699
+  FBSDKLoginKit: 4127e8260b96e0e4cc8ba0c10c95ee63941aa24a
+  FBSDKShareKit: 0dc4bd06e11eb2ad30d165132c6c879b8d449ae3
   Firebase: 9cbe4e5b5eaafa05dc932be58b7c8c3820d71e88
   FirebaseAnalytics: 843c7f64a8f9c79f0d03281197ebe7bb1d58d477
   FirebaseAuth: e7f86c2dfc57281cd01f7da5e4b40e01e4510a4a
@@ -297,6 +334,7 @@ SPEC CHECKSUMS:
   React-jsi: 4d8c9efb6312a9725b18d6fc818ffc103f60fec2
   React-jsiexecutor: 90ad2f9db09513fc763bc757fdc3c4ff8bde2a30
   React-jsinspector: e08662d1bf5b129a3d556eb9ea343a3f40353ae4
+  react-native-fbsdk: 45e28bbab3e905cbc635c0bdd3444b372e933ae9
   React-RCTActionSheet: b0f1ea83f4bf75fb966eae9bfc47b78c8d3efd90
   React-RCTAnimation: 359ba1b5690b1e87cc173558a78e82d35919333e
   React-RCTBlob: 5e2b55f76e9a1c7ae52b826923502ddc3238df24

@@ -9,6 +9,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.facebook.react.PackageList;
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
+import com.facebook.FacebookSdk;
 
 import java.util.List;
 
