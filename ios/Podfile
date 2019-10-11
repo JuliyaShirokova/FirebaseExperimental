@@ -34,6 +34,9 @@ target 'FirebaseExperimental' do
   pod 'Firebase/Analytics'
   pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
   
+  #add facebook auth
+  pod 'FBSDKLoginKit'
+  
   target 'FirebaseExperimentalTests' do
     inherit! :search_paths
     # Pods for testing
