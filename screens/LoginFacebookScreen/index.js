@@ -1,11 +1,19 @@
-import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { LoginButton, AccessToken, LoginManager } from "react-native-fbsdk";
+import React, { Component } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk'
 
 export default class LoginFacebookScreen extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      userInfo: {},
+      userFirebase: {}
+    }
+  }
+
   async componentDidMount () {
-    LoginManager.logInWithPermissions(['public_profile']).then(
-      function (result) {
+    LoginManager.logInWithPermissions(['public_profile'])
+      .then(result => {
         if (result.isCancelled) {
           console.log('Login cancelled')
         } else {
@@ -15,7 +23,7 @@ export default class LoginFacebookScreen extends Component {
           )
         }
       },
-      function (error) {
+      error => {
         console.log('Login fail with error: ' + error)
       }
     )
@@ -31,13 +39,35 @@ export default class LoginFacebookScreen extends Component {
             } else if (result.isCancelled) {
               console.log('login is cancelled.')
             } else {
-              AccessToken.getCurrentAccessToken().then(data => {
-                console.log(data.accessToken.toString())
-              })
+              AccessToken.getCurrentAccessToken()
+                .then(userInfo => {
+                  console.log('user in Facebook', userInfo)
+                  this.setState({ userInfo })
+
+                  const credential = firebase.auth.FacebookAuthProvider.credential(
+                    userInfo.accessToken
+                  )
+                  firebase
+                    .auth()
+                    .signInWithCredential(credential)
+                    .then(user => {
+                      console.log('user firebase ', user)
+                      this.setState({ userFirebase: user })
+                    })
+                })
+                .catch(err => {
+                  console.log('error get token', err)
+                })
             }
           }}
           onLogoutFinished={() => console.log('logout.')}
         />
+        <View style={styles.userInfoContainer}>
+          <Text>
+            Current user email -
+            {this.state.userFirebase.user && this.state.userFirebase.user.email}
+          </Text>
+        </View>
       </View>
     )
   }
