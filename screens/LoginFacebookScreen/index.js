@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { LoginButton, AccessToken , LoginManager } from "react-native-fbsdk";
-
+import { View, StyleSheet } from 'react-native';
+import { LoginButton, AccessToken, LoginManager } from "react-native-fbsdk";
 
 export default class LoginFacebookScreen extends Component {
   async componentDidMount () {
@@ -24,7 +23,7 @@ export default class LoginFacebookScreen extends Component {
 
   render () {
     return (
-      <View>
+      <View style={styles.container}>
         <LoginButton
           onLoginFinished={(error, result) => {
             if (error) {
@@ -43,3 +42,10 @@ export default class LoginFacebookScreen extends Component {
     )
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
