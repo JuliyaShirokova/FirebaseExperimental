@@ -1,66 +1,70 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk'
+import React, { Component } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { LoginButton, AccessToken, LoginManager } from "react-native-fbsdk";
+import { firebase } from "@react-native-firebase/auth";
 
 export default class LoginFacebookScreen extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       userInfo: {},
-      userFirebase: {}
-    }
+      userFirebase: {},
+    };
   }
 
-  async componentDidMount () {
-    LoginManager.logInWithPermissions(['public_profile'])
-      .then(result => {
+  async componentDidMount() {
+    LoginManager.logInWithPermissions(["public_profile", "email"]).then(
+      result => {
         if (result.isCancelled) {
-          console.log('Login cancelled')
+          console.log("Login cancelled");
         } else {
           console.log(
-            'Login success with permissions: ' +
+            "Login success with permissions: " +
               result.grantedPermissions.toString()
-          )
+          );
         }
       },
       error => {
-        console.log('Login fail with error: ' + error)
+        console.log("Login fail with error: " + error);
       }
-    )
+    );
   }
 
-  render () {
+  render() {
     return (
       <View style={styles.container}>
         <LoginButton
+          publishPermissions={["email"]}
           onLoginFinished={(error, result) => {
             if (error) {
-              console.log('login has error: ' + result.error)
+              console.log("login has error: " + result.error);
             } else if (result.isCancelled) {
-              console.log('login is cancelled.')
+              console.log("login is cancelled.");
             } else {
+              console.log("login finished");
               AccessToken.getCurrentAccessToken()
                 .then(userInfo => {
-                  console.log('user in Facebook', userInfo)
-                  this.setState({ userInfo })
+                  console.log("user in Facebook", userInfo);
+                  this.setState({ userInfo });
 
                   const credential = firebase.auth.FacebookAuthProvider.credential(
                     userInfo.accessToken
-                  )
+                  );
+
                   firebase
                     .auth()
                     .signInWithCredential(credential)
                     .then(user => {
-                      console.log('user firebase ', user)
-                      this.setState({ userFirebase: user })
-                    })
+                      console.log("user firebase ", user);
+                      this.setState({ userFirebase: user });
+                    });
                 })
                 .catch(err => {
-                  console.log('error get token', err)
-                })
+                  console.log("error get token", err);
+                });
             }
           }}
-          onLogoutFinished={() => console.log('logout.')}
+          onLogoutFinished={() => console.log("logout.")}
         />
         <View style={styles.userInfoContainer}>
           <Text>
@@ -69,13 +73,13 @@ export default class LoginFacebookScreen extends Component {
           </Text>
         </View>
       </View>
-    )
+    );
   }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

@@ -9,8 +9,6 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.facebook.react.PackageList;
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 import java.util.List;
 
@@ -46,8 +44,6 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
-    FacebookSdk.sdkInitialize(getApplicationContext());
-    AppEventsLogger.activateApp(this);
   }
 
 }

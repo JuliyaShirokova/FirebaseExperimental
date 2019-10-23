@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { firebase } from "@react-native-firebase/auth";
 
 export default class LoginTwitterScreen extends Component {
 
